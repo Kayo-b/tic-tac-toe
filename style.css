@@ -27,7 +27,10 @@ body{
     border-radius:5px;
 
 }
-
+#playerModal.show{
+    pointer-events: auto;
+    opacity: 1;
+}
 #playerModal{
     display:flex;
     justify-content: center;
@@ -39,7 +42,10 @@ body{
     color:rgb(255,255,255,0.8);
     padding:10px 10px;
     border:1px solid black;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.9)
+    box-shadow: 0 4px 8px rgba(0,0,0,0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition:opacity 0.2s ease;
 
 
 }
@@ -76,6 +82,15 @@ button{
     
     
 }
+
+.sectorX{
+    background-image: url(sectorX.svg);
+}
+
+.sectorO{
+    background-image: url(circle3.svg);
+}
+
 
 .sector{
     align-items:center;
