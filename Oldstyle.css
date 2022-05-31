@@ -50,26 +50,6 @@ body{
 
 }
 
-#victory{
-    opacity:0;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    position:fixed;
-    flex-direction:column;
-    border-radius:5px;
-    background-color: rgba(0,0,0,0.5);
-    color:rgb(255,255,255,0.8);
-    padding:10px 10px;
-    border:1px solid black;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.9);
-    transition:opacity 0.5s ease;
-}
-
-#victory.show{
-    pointer-events: auto;
-    opacity: 1;
-}
 #buttonContainer{
     display:flex;
     align-items: center;
@@ -104,21 +84,11 @@ button{
 }
 
 .sectorX{
-    width:100%;
     background-image: url(sectorX.svg);
-    background-size: cover;
-    height: 0;
-    padding: 0; /* reset */
-    padding-bottom: calc(100% * 3 / 4);
 }
 
 .sectorO{
-    width:100%;
     background-image: url(circle3.svg);
-    background-size: cover;
-    height: 0;
-    padding: 0; /* reset */
-    padding-bottom: calc(100% * 3 / 4);
 }
 
 
