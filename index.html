@@ -8,16 +8,21 @@
  </head>   
     <body>
         <div id="header">Tic-Tac-Toe
-            <button id="selectP">Select Player</button>
+            <button id="selectP">Game Mode</button>
         </div>
         <!-- <div id="menu"></div> -->
 
         <div id="mainContainer">
             <div id="modalContainer">
+                <div id="gameMode">
+                    <h3>Select Game Mode</h3>
+                    <button id="single">Singleplayer</button>
+                    <button id="multi">Local multiplayer</button>
 
+                </div>
         
                 <div id="playerModal">
-                    <h1>Choose your player!</h1>
+                    <h3>Choose your player!</h3>
                     <div id="buttonContainer">
                         <button id="player1">X</button>
                         <button id="player2">O</button>
@@ -29,17 +34,21 @@
                 </div>
                 
             </div>
-            <div id="board">
-                <div class="sector"></div>
-                <div class="sector"></div>
-                <div class="sector"></div>
-                <div class="sector"></div>
-                <div class="sector"></div>
-                <div class="sector"></div>
-                <div class="sector"></div>
-                <div class="sector"></div>
-                <div class="sector"></div>
+            <div id="boardCon">
+                <div id="board">
+                    <div class="sector" id="0"></div>
+                    <div class="sector" id="1"></div>
+                    <div class="sector" id="2"></div>
+                    <div class="sector" id="3"></div>
+                    <div class="sector" id="4"></div>
+                    <div class="sector" id="5"></div>
+                    <div class="sector" id="6"></div>
+                    <div class="sector" id="7"></div>
+                    <div class="sector" id="8"></div>
+                </div>
+
             </div>
+           
             
     </body>
 
