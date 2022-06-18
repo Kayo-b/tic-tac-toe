@@ -32,12 +32,17 @@ score(array, player){
     || array[0] == player && array[4] == player && array[8] == player  
     || array[2] == player && array[4] == player && array[6] == player     
 ){  modals.victory(player)
+    for(let  x = 0; x<array.length; x++){
+    document.getElementById(x).style.backgroundColor = 
+            array[x] == player ? "blue" : array[x]  == player ? "red" : null}
     return true
 }else if(roundCount == 9){
     modals.victory("draw");
+    for(let x = 0; x < array.length; x++)
+    document.getElementById(x).style.backgroundColor = "green";
     return false;
 }
- 
+  
     }
 }
 
@@ -51,7 +56,6 @@ for(let x=0;x<boardArray.length;x++){
  boardArray[x].addEventListener("click", ()=>{
      if(count%2 == 0 && board[x] != "x" && board[x] != "o"){
          count += 1;
-        //  console.log(boardArray[x].innerHTML);
          gameBoard.insert(setMainPlayer,x);
          if(setMainPlayer == 'x'){
              boardArray[x].classList.add("sectorX");
@@ -185,7 +189,8 @@ else{
 
 
 //Single player mode
-//Main code source: github.com/ahmadabdolsaheb/minimaxarticle
+//Code mainly based from: https://github.com/ahmadabdolsaheb/minimaxarticle and https://github.com/beaucarnes/fcc-project-tutorials/tree/master/tictactoe/7
+//And from this article https://medium.com/free-code-camp/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37
 
     var origBoard;
     const sector = document.getElementsByClassName("sector")
@@ -201,9 +206,9 @@ else{
         [0, 4, 8],
         [6, 4, 2]
 ]
-
+var teste = winCombos.entries()
+console.log(teste.next().value)
     function startGame(){
-        // sector = document.querySelectorAll(".sector")
         origBoard = Array.from(Array(9).keys());
         input.clearBoard();
         for (var i = 0; i < sector.length; i++){
@@ -223,10 +228,7 @@ else{
 
     function turn(squareId, player) {
         origBoard[squareId] = player;
-        console.log(squareId)
         var inner = document.getElementById(squareId)
-        // var innerTxt = inner.innerHTML = player;
-        console.log(inner)
         if(origBoard[squareId] === "O"){
             inner.classList.add("sectorO");
         }
@@ -240,25 +242,24 @@ else{
     
     function checkWin(board, player) {
         //study notes
-        //board.reduce(a, e, i) passa pelo array(board) e acumula(a) em outro array
-        //os index(i) quando o elemento(e) for igual ao valor do jogador(player)
-        //dessa forma, sabe-se quais sao as celulas ja foram ocupadas por jogadas do player em questão
+        //board.reduce(a,e,i) passed through the board array and adds its indexes(i) to a new array when the element(e) is equal to the value of player
+        //this way we can find which cells have already been occupied by the player
         // ? = then 
         // : = else
 
-        //---Exemplos---
-
+        //Example:
         // let player = "O"
         // let board = ["O","O","O",3,4,5]
         // let testReduce = board.reduce((a, e, i) =>
         // (e === player) ? a.concat(i) : a, [])
-        // console.log(testReduce.indexOf(2))//retorna [1,4]
-        // Para cada array dentro de winCombo salvar o index e o valor em si(let[index, win])
-        // Exempo: vai percorrer o primeiro valor como index = 0 e win = [0,1,2] 
-        // E então irá verificar se cada elemento dentro do array vitorioso "win"
-        // foi percorrido pela jogada do player que consta como retorno da função "plays = board.reduce()"
-        // e irá salvar qual o index vencedor e qual foi o jogador vitorioso na variável gameWon.
-        // Exemplo:
+        // console.log(testReduce.indexOf(2))//returns [1,4]
+
+
+        // For each array inside winCombo the index and the value are saved(let[index,win])
+        // each element of the array will be checked to see if it belongs to one of the winning sequences
+        // played by the funcion "plays = board.reduce()" and then it saves the winning index
+
+        // Example:
         // var board2 = [[3, 4, 5], [0, 1, 2]]
         // for(let[index, example] of board2.entries()){
         //     if(example.every(elem => testReduce.indexOf(elem) > -1)){
@@ -269,13 +270,15 @@ else{
             
             
         // }
-        // console.log(gameTest)//retorna { index: 1, player: 'O' } pois o testReduce possui a sequencia vitoriosa que esta presente no segundo index do array board2
+        // console.log(gameTest)//returns { index: 1, player: 'O' } because testReduce has the winning sequence present in the second index(1) of the board2 array
+
+
         let plays = board.reduce((a, e, i) => 
         (e === player) ? a.concat(i) : a, []);
         let gameWon = null;
         // creates array with index number and winner array combo
         for (let [index, win] of winCombos.entries()) {
-            //função win.every verifica se todos os elementos dentro do array win estão contidos no array plays, se não estiver contido irá retornar -1
+            //function win.every checks if all elements inside the win array are contained in the plays array, if its not contained it will return -1
             if (win.every(elem => plays.indexOf(elem) > -1)) {
                 gameWon = {index: index, player: player};
                 break;
@@ -293,12 +296,11 @@ else{
         for (var i = 0; i < sector.length; i++) {
             sector[i].removeEventListener("click", turnClick, false);
         }
-        declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose!");
+        declareWinner(gameWon.player == huPlayer ? "o" : "x");
     }
 
     function declareWinner(who) {
-        // document.querySelector(".endgame").style.display = "block";
-        // document.querySelector(".endgame .text").innerText = who;
+        modals.victory(who);
         console.log("winner is ", who)
     
     }
@@ -308,7 +310,7 @@ else{
     }
 
     function bestSpot() {
-        //AI basica = emptySquares()[0];
+        //basicAI = emptySquares()[0];
             return minimax(origBoard, aiPlayer).index;
     
     }
